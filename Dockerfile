@@ -12,7 +12,7 @@ COPY --from=builder /app/main .
 COPY static/ ./static/
 COPY templates/ ./templates/
 
-ENV PORT=3000
-EXPOSE 3000
+ENV PORT=4000
+EXPOSE 4000
 
 CMD ["./main"]
