@@ -1,5 +1,10 @@
-{{range .}}
-<div class="gallery-item">
-    <img src="{{.Path}}" alt="{{.Title}}" loading="lazy">
+<div class="gallery-grid">
+    {{range .}}
+    <div class="gallery-item">
+        <img src="{{.Path}}" alt="{{.Title}}" loading="lazy">
+        <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">{{.Title}}</h3>
+        </div>
+    </div>
+    {{end}}
 </div>
-{{end}}

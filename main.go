@@ -14,6 +14,18 @@ type Image struct {
 	Title string
 }
 
+type PageData struct {
+	Title       string
+	Description string
+	SocialLinks []SocialLink
+}
+
+type SocialLink struct {
+	Platform string
+	URL      string
+	Icon     string
+}
+
 func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -35,8 +47,34 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	tmpl := template.Must(template.ParseFiles("templates/index.html"))
-	tmpl.Execute(w, nil)
+	data := PageData{
+		Title:       "Portfolio Graficzne",
+		Description: "Portfolio graficzne Robirysuje.pl",
+		SocialLinks: []SocialLink{
+			{
+				Platform: "Instagram",
+				URL:      "https://instagram.com/your-profile",
+				Icon:     "/static/images/instagram.png",
+			},
+			{
+				Platform: "Allegro",
+				URL:      "https://allegro.pl/your-shop",
+				Icon:     "/static/images/allegro.png",
+			},
+		},
+	}
+	tmpl, err := template.ParseFiles("templates/index.html")
+	if err != nil {
+		log.Printf("Error parsing template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	if err := tmpl.Execute(w, data); err != nil {
+		log.Printf("Error executing template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 }
 
 func handleGallery(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +90,7 @@ func handleGallery(w http.ResponseWriter, r *http.Request) {
 		if !file.IsDir() && isImageFile(file.Name()) {
 			images = append(images, Image{
 				Path:  "/static/gallery/" + file.Name(),
-				Title: strings.TrimSuffix(file.Name(), filepath.Ext(file.Name())),
+				Title: strings.Split(strings.TrimSuffix(file.Name(), filepath.Ext(file.Name())), "_")[1],
 			})
 		}
 	}

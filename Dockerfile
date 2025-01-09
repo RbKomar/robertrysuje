@@ -2,7 +2,7 @@ FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 COPY . .
-RUN go mod init robrysuje
+RUN go mod init robirysuje
 RUN go build -o main .
 
 FROM alpine:3.18

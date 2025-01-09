@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>robrysuje.pl - {{.Title}}</title>
-    <meta name="description" content="Portfolio prac graficznych - robrysuje.pl">
+    <title>robirysuje.pl - {{.Title}}</title>
+    <meta name="description" content="{{.Description}}">
+    <link rel="icon" type="image/png" href="/static/images/miniature.png">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 </head>
 <body>
     <header>
-        <img src="/static/images/logo.png" alt="robrysuje.pl" class="logo">
+        <img src="/static/images/logo.png" alt="robirysuje.pl" class="logo">
     </header>
     
     <main>
@@ -21,12 +22,11 @@
     
     <footer>
         <div class="social-links">
-            <a href="https://instagram.com/your-profile" target="_blank" class="social-button">
-                <img src="/static/images/instagram.png" alt="Instagram">
+            {{range .SocialLinks}}
+            <a href="{{.URL}}" target="_blank" class="social-button">
+                <img src="{{.Icon}}" alt="{{.Platform}}">
             </a>
-            <a href="https://allegro.pl/your-shop" target="_blank" class="social-button">
-                <img src="/static/images/allegro.png" alt="Allegro">
-            </a>
+            {{end}}
         </div>
     </footer>
 </body>
