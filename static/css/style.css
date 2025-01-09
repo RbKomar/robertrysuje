@@ -136,12 +136,13 @@ footer {
     padding: 0.5rem;
     border-radius: 100%;
     transition: all 0.3s ease;
+    scale: 1.5;
 }
 
 .social-button:hover {
     background-color: white;
     transform: translateY(-5px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
 }
 
 .social-button img {
