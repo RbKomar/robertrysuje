@@ -49,7 +49,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 	}
 	data := PageData{
 		Title:       "Portfolio Graficzne",
-		Description: "Portfolio graficzne Robirysuje.pl",
+		Description: "Tworzone przez ludzi dla ludzi",
 		SocialLinks: []SocialLink{
 			{
 				Platform: "Instagram",
